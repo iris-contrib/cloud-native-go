@@ -1,0 +1,73 @@
+## Prerequisites
+
+In order to build and run this showcase you need to have a couple of things installed:
+
+* The Go SDK (using Brew)
+* The Iris Web Framework
+* The Docker Toolbox or native Docker, whatever you prefer
+* The Make tool (optional)
+* The Wercker CLI (optional)
+
+## Building the showcase
+
+In case you have make installed you can simply issue the following command to build and
+install the application:
+
+```shell
+$ make install
+```
+
+In case you want to give Wercker a try (make sure you have the Wercker CLI installed) you
+can issue the following command:
+
+```shell
+$ wercker dev --publish 8080 
+```
+
+This will build and run the microservice, and also watch for changes to the sources. If you only
+want to run the Wercker build pipeline use the following command:
+
+```shell
+$ wercker build 
+```
+
+## Running the showcase
+
+You have two options. Either build and run the showcase locally, or build and run the Docker image.
+
+```shell
+$ make docker
+$ docker run --name cloud-native-go -it -p 18080:8080 cloud-native-go:1.0.0
+```
+
+Now open a browser or use somethin like `curl` or `HTTPie` and issue a GET request on the
+URL http://192.168.99.100:18080/api/hello
+
+##Deploying to Kubernetes
+
+We will be using Minikube to run a small Kubernetes cluster locally. Make sure you have build
+the Docker image locally.
+
+```shell
+$ kubectl create -f k8s-deployment.yml
+$ kubectl get deployments pods
+$ kubectl scale deployment cloud-native-go --replicas=3
+$ kubectl get pods
+$ kubectl get services
+```
+
+If you want to access the Go microservice you need to use the node port displayed by the last
+command, e.g. `http GET 192.168.99.100:32278/api/hello`
+
+## References
+
+* https://github.com/kataras/iris [Go web framework]
+* https://gokit.io [Go Kit: A toolkit for microservices]
+* https://github.com/micro/go-micro [Go microservice framework]
+* http://www.wercker.com/cli/install/osx [Install the Wercker CLI]
+
+## License
+
+This software is provided under the MIT open source license.
+
+This is a ported version of M.-Leander Reimer (@lreimer), read [LICENSE file](https://github.com/lreimer/cloud-native-go/blob/master/LICENSE) for details. 
