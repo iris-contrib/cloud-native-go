@@ -1,8 +1,6 @@
 package api
 
-import (
-	"github.com/kataras/iris/context"
-)
+import "github.com/kataras/iris"
 
 // Hello response structure
 type Hello struct {
@@ -10,7 +8,7 @@ type Hello struct {
 }
 
 // HelloHandler to be used as Handler for Hello API
-func HelloHandler(ctx context.Context) {
+func HelloHandler(ctx iris.Context) {
 	m := Hello{"Welcome to Cloud Native Go."}
 	ctx.JSON(m)
 }

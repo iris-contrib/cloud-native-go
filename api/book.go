@@ -1,9 +1,6 @@
 package api
 
-import (
-	"github.com/kataras/iris"
-	"github.com/kataras/iris/context"
-)
+import "github.com/kataras/iris"
 
 // Book type with Name, Author and ISBN
 type Book struct {
@@ -30,12 +27,12 @@ func AllBooks() []Book {
 }
 
 // AllBooksHandler to be used as Handler for Book API
-func AllBooksHandler(ctx context.Context) {
+func AllBooksHandler(ctx iris.Context) {
 	ctx.JSON(AllBooks())
 }
 
 // CreateBookHandler to be used as Handler for Book API
-func CreateBookHandler(ctx context.Context) {
+func CreateBookHandler(ctx iris.Context) {
 	book := Book{}
 	if err := ctx.ReadJSON(book); err != nil {
 		ctx.StatusCode(400)
@@ -51,7 +48,7 @@ func CreateBookHandler(ctx context.Context) {
 }
 
 // GetBookHandler to be used as Handler for Book API
-func GetBookHandler(ctx context.Context) {
+func GetBookHandler(ctx iris.Context) {
 	isbn := ctx.Params().Get("isbn")
 
 	book, found := GetBook(isbn)
@@ -65,7 +62,7 @@ func GetBookHandler(ctx context.Context) {
 }
 
 // UpdateBookHandler to be used as Handler for Book API
-func UpdateBookHandler(ctx context.Context) {
+func UpdateBookHandler(ctx iris.Context) {
 	isbn := ctx.Params().Get("isbn")
 
 	book := Book{ISBN: isbn}
@@ -81,7 +78,7 @@ func UpdateBookHandler(ctx context.Context) {
 }
 
 // DeleteBookHandler to be used as Handler for Book API
-func DeleteBookHandler(ctx context.Context) {
+func DeleteBookHandler(ctx iris.Context) {
 	isbn := ctx.Params().Get("isbn")
 	DeleteBook(isbn)
 }
