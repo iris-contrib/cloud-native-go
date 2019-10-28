@@ -1,6 +1,6 @@
 package api
 
-import "github.com/kataras/iris"
+import "github.com/kataras/iris/v12"
 
 // Hello response structure
 type Hello struct {

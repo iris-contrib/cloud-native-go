@@ -1,6 +1,6 @@
 package api
 
-import "github.com/kataras/iris"
+import "github.com/kataras/iris/v12"
 
 // Book type with Name, Author and ISBN
 type Book struct {
@@ -11,8 +11,8 @@ type Book struct {
 }
 
 var books = map[string]Book{
-	"0345391802": Book{Title: "The Hitchhiker's Guide to the Galaxy", Author: "Douglas Adams", ISBN: "0345391802"},
-	"0000000000": Book{Title: "Cloud Native Go", Author: "M.-Leander Reimer", ISBN: "0000000000"},
+	"0345391802": {Title: "The Hitchhiker's Guide to the Galaxy", Author: "Douglas Adams", ISBN: "0345391802"},
+	"0000000000": {Title: "Cloud Native Go", Author: "M.-Leander Reimer", ISBN: "0000000000"},
 }
 
 // AllBooks returns a slice of all books

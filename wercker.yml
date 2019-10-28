@@ -1,7 +1,7 @@
 dev:
   # The container definition we want to use for developing our app
-  box: 
-    id: golang:1.8.3-alpine
+  box:
+    id: golang:1.13.3-alpine3.10
     cmd: /bin/sh
   steps:
     - internal/watch:
@@ -12,8 +12,8 @@ dev:
 
 build:
   # The container definition we want to use for building our app
-  box: 
-    id: golang:1.8.3-alpine
+  box:
+    id: golang:1.13.3-alpine3.10
     cmd: /bin/sh
   steps:
     - wercker/golint
@@ -35,11 +35,11 @@ build:
 deploy:
   # The container definition we want to use to run our app
   box: 
-    id: alpine:3.4
+    id: alpine:3.10
     cmd: /bin/sh
   steps:
     - internal/docker-push:
-        author: "Bill Q. <hiveminded@tutanota.com>"
+        author: "Iris Contrib"
         username: $USERNAME
         password: $PASSWORD
         repository: iris-contrib/cloud-native-go

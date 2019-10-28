@@ -3,14 +3,13 @@ package main
 import (
 	"os"
 
-	"github.com/kataras/iris"
-	"github.com/kataras/iris/context"
-
 	"github.com/iris-contrib/cloud-native-go/api"
+
+	"github.com/kataras/iris/v12"
 )
 
 func main() {
-	app := iris.New()
+	app := iris.Default()
 
 	app.Get("/", index)
 
@@ -42,6 +41,6 @@ func port() string {
 	return port
 }
 
-func index(ctx context.Context) {
+func index(ctx iris.Context) {
 	ctx.Writef("Welcome to Cloud Native")
 }
