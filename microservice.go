@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	app := iris.Default()
+	app := iris.New()
 
 	app.Get("/", index)
 
@@ -17,18 +17,20 @@ func main() {
 	{
 		apiGroup.Get("/echo", api.EchoHandler)
 		apiGroup.Get("/hello", api.HelloHandler)
-		apiGroup.Get("/books", api.AllBooksHandler)
-		apiGroup.Get("/books/{isbn:string}", api.GetBookHandler)
-		apiGroup.Post("/books", api.CreateBookHandler)
-		apiGroup.Put("/books/{isbn:string}", api.UpdateBookHandler)
-		apiGroup.Delete("/books/{isbn:string}", api.DeleteBookHandler)
-
+		apiBooksGroup := apiGroup.Party("/books")
+		{
+			apiBooksGroup.Get("/", api.AllBooksHandler)
+			apiBooksGroup.Get("/{isbn:string}", api.GetBookHandler)
+			apiBooksGroup.Post("/", api.CreateBookHandler)
+			apiBooksGroup.Put("/{isbn:string}", api.UpdateBookHandler)
+			apiBooksGroup.Delete("/{isbn:string}", api.DeleteBookHandler)
+		}
 	}
 
-	app.Run(iris.Addr(":" + port()))
+	app.Listen(":" + getPort())
 }
 
-func port() string {
+func getPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

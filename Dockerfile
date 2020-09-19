@@ -1,12 +1,16 @@
-FROM golang:1.13-alpine
+FROM golang:latest AS builder
+RUN apt-get update
+WORKDIR /go/src/cloud-native-go
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64
+# Caching go modules and build the binary.
+COPY go.mod .
+RUN go mod download
+COPY . .
+RUN go install
 
-RUN apk update && apk upgrade && apk add --no-cache bash git
-RUN go get github.com/iris-contrib/cloud-native-go
-
-ENV SOURCES /go/src/github.com/iris-contrib/cloud-native-go
-# COPY . ${SOURCES}
-
-RUN cd ${SOURCES} $$ CGO_ENABLED=0 go build
-
-ENTRYPOINT cloud-native-go
-EXPOSE 8080
+FROM scratch
+COPY --from=builder /go/bin/cloud-native-go .
+ENTRYPOINT ["./cloud-native-go"]

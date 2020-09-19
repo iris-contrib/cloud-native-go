@@ -2,11 +2,11 @@
 
 In order to build and run this showcase you need to have a couple of things installed:
 
-* The Go SDK (using Brew)
-* The Iris Web Framework
-* The Docker Toolbox or native Docker, whatever you prefer
-* The Make tool (optional)
-* The Wercker CLI (optional)
+* The [Go Programming Language](https://golang.org)
+* The [Iris Web Framework](https://github.com/kataras/iris)
+* The [Docker Toolbox](https://www.docker.com/get-started) or native Docker, whatever you prefer
+* The [Make tool](https://man7.org/linux/man-pages/man1/make.1.html) (optional)
+* The [Wercker CLI](https://devcenter.wercker.com/development/cli/) (optional)
 
 ## Building the showcase
 
@@ -14,7 +14,8 @@ In case you have make installed you can simply issue the following command to bu
 install the application:
 
 ```shell
-$ make install
+$ go env -w CGO_ENABLED=0
+$ go install -a ./... # or make install
 ```
 
 In case you want to give Wercker a try (make sure you have the Wercker CLI installed) you
@@ -36,14 +37,14 @@ $ wercker build
 You have two options. Either build and run the showcase locally, or build and run the Docker image.
 
 ```shell
-$ make docker
-$ docker run --name cloud-native-go -it -p 18080:8080 cloud-native-go:1.0.1
+$ docker build -t cloud-native-go:1.0.2 . # or make docker
+$ docker run --name cloud-native-go -it -p 18080:8080 cloud-native-go:1.0.2
 ```
 
 Now open a browser or use somethin like `curl` or `HTTPie` and issue a GET request on the
-URL http://192.168.99.100:18080/api/hello
+URL http://localhost:18080/api/hello
 
-##Deploying to Kubernetes
+## Deploying to Kubernetes
 
 We will be using Minikube to run a small Kubernetes cluster locally. Make sure you have build
 the Docker image locally.
@@ -57,14 +58,7 @@ $ kubectl get services
 ```
 
 If you want to access the Go microservice you need to use the node port displayed by the last
-command, e.g. `http GET 192.168.99.100:32278/api/hello`
-
-## References
-
-* https://github.com/kataras/iris [Go web framework]
-* https://gokit.io [Go Kit: A toolkit for microservices]
-* https://github.com/micro/go-micro [Go microservice framework]
-* http://www.wercker.com/cli/install/osx [Install the Wercker CLI]
+command, e.g. `http GET localhost:32278/api/hello`
 
 ## License
 

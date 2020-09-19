@@ -1,7 +1,7 @@
 dev:
   # The container definition we want to use for developing our app
   box:
-    id: golang:1.13.3-alpine3.10
+    id: golang:latest
     cmd: /bin/sh
   steps:
     - internal/watch:
@@ -13,7 +13,7 @@ dev:
 build:
   # The container definition we want to use for building our app
   box:
-    id: golang:1.13.3-alpine3.10
+    id: golang:latest
     cmd: /bin/sh
   steps:
     - wercker/golint
@@ -35,7 +35,7 @@ build:
 deploy:
   # The container definition we want to use to run our app
   box: 
-    id: alpine:3.10
+    id: alpine:latest
     cmd: /bin/sh
   steps:
     - internal/docker-push:
