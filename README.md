@@ -2,8 +2,8 @@
 
 In order to build and run this showcase you need to have a couple of things installed:
 
-* The [Go Programming Language](https://golang.org)
-* The [Iris Web Framework](https://github.com/kataras/iris)
+* The [Go Programming Language](https://go.dev)
+* The [Iris Web Framework](https://www.iris-go.com)
 * The [Docker Toolbox](https://www.docker.com/get-started) or native Docker, whatever you prefer
 * The [Make tool](https://man7.org/linux/man-pages/man1/make.1.html) (optional)
 * The [Wercker CLI](https://devcenter.wercker.com/development/cli/) (optional)

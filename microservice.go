@@ -20,10 +20,10 @@ func main() {
 		apiBooksGroup := apiGroup.Party("/books")
 		{
 			apiBooksGroup.Get("/", api.AllBooksHandler)
-			apiBooksGroup.Get("/{isbn:string}", api.GetBookHandler)
+			apiBooksGroup.Get("/{isbn}", api.GetBookHandler)
 			apiBooksGroup.Post("/", api.CreateBookHandler)
-			apiBooksGroup.Put("/{isbn:string}", api.UpdateBookHandler)
-			apiBooksGroup.Delete("/{isbn:string}", api.DeleteBookHandler)
+			apiBooksGroup.Put("/{isbn}", api.UpdateBookHandler)
+			apiBooksGroup.Delete("/{isbn}", api.DeleteBookHandler)
 		}
 	}
 

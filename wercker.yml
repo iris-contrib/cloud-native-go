@@ -23,7 +23,7 @@ build:
     - script:
         name: go build
         code: |
-          go get github.com/iris-contrib/cloud-native-go
+          go get github.com/iris-contrib/cloud-native-go@master
           CGO_ENABLED=0 go build -o cloud-native-go
     - script:
         name: copy binary
